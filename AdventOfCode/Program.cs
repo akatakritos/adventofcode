@@ -14,6 +14,18 @@ namespace AdventOfCode
             Day1Part2();
             Day2();
 
+            var result = Challenge3.NumberOfHousesVisited(InputData.Load("Day3.txt"));
+            Console.WriteLine($"Santa visited {result} houses.");
+
+            result = Challenge3.NumberOfHousesVisitedWithRoboSantaToo(InputData.Load("Day3.txt"));
+            Console.WriteLine($"Santa and his robot visited {result} houses.");
+
+            //var hashResult = AdventCoins.Mine("yzbqklnj");
+            //Console.WriteLine($"Advent Count Value {hashResult.Input} hashed to {hashResult.Hash}");
+
+            //hashResult = AdventCoins.Mine("yzbqklnj", "000000");
+            //Console.WriteLine($"Advent Count Value {hashResult.Input} hashed to {hashResult.Hash}");
+
             Console.ReadKey();
         }
 
