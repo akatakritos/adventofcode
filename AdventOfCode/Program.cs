@@ -26,6 +26,9 @@ namespace AdventOfCode
             //hashResult = AdventCoins.Mine("yzbqklnj", "000000");
             //Console.WriteLine($"Advent Count Value {hashResult.Input} hashed to {hashResult.Hash}");
 
+            var niceWords = NiceString.TestMultiple(InputData.LoadLines("NaughtyWords.txt"));
+            Console.WriteLine($"There are {niceWords} nice words in the list.");
+
             Console.ReadKey();
         }
 
