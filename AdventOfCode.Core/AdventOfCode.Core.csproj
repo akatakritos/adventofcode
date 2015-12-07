@@ -43,6 +43,7 @@
     <Compile Include="AdventCoins.cs" />
     <Compile Include="Challenge3.cs" />
     <Compile Include="InputData.cs" />
+    <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -29,6 +29,9 @@ namespace AdventOfCode
             var niceWords = NiceString.TestMultiple(InputData.LoadLines("NaughtyWords.txt"));
             Console.WriteLine($"There are {niceWords} nice words in the list.");
 
+            var nicerWords = NicerString.TestMultiple(InputData.LoadLines("NaughtyWords.txt"));
+            Console.WriteLine($"There are {nicerWords} nicer words in the list.");
+
             Console.ReadKey();
         }
 
