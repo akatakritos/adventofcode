@@ -58,6 +58,7 @@
     </Content>
     <Content Include="InputData\Day2Part1.txt" />
     <Content Include="InputData\Day3.txt" />
+    <Content Include="InputData\LightCommands.txt" />
     <Content Include="InputData\NaughtyWords.txt" />
   </ItemGroup>
   <ItemGroup>

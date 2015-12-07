@@ -9,11 +9,9 @@ namespace AdventOfCode.Core
         public static bool Test(string input)
         {
             input = input.ToLowerInvariant();
-            Console.Write(input);
 
             var result =  ContainsRepeatingPairWithoutOverlapping(input)
                    & ContainsSandwich(input);
-            Console.WriteLine("        " + result);
             return result;
         }
 
@@ -28,7 +26,6 @@ namespace AdventOfCode.Core
             {
                 if (input[i] == input[i + 2])
                 {
-                    Console.Write(" + Found sandwich: " + input.Substring(i, 3));
                     return true;
                 }
             }
@@ -52,7 +49,6 @@ namespace AdventOfCode.Core
 
                 if (pairs.Contains(pair) && lastPair != pair)
                 {
-                    Console.Write($" + Found Pair: {pair}");
                     return true;
                 }
 

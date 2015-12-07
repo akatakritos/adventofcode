@@ -32,6 +32,12 @@ namespace AdventOfCode
             var nicerWords = NicerString.TestMultiple(InputData.LoadLines("NaughtyWords.txt"));
             Console.WriteLine($"There are {nicerWords} nicer words in the list.");
 
+            var lights = ChristmasLights.CountActiveLights(InputData.LoadLines("LightCommands.txt"));
+            Console.WriteLine($"There are {lights} lights turned on.");
+
+            var brightness = ChristmasLights.GetTotalBrightnessFromAncientNordicElvish(InputData.LoadLines("LightCommands.txt"));
+            Console.WriteLine($"After translating to nordic elvish, the total brightness is {brightness}");
+
             Console.ReadKey();
         }
 

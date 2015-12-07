@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AdventCoins.cs" />
     <Compile Include="Challenge3.cs" />
+    <Compile Include="ChristmasLights.cs" />
     <Compile Include="InputData.cs" />
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
