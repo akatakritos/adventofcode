@@ -27,6 +27,11 @@ namespace AdventOfCode.Core
         {
             return Value;
         }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 
     public class NamedNodeProvider : IValueProvider
@@ -40,6 +45,11 @@ namespace AdventOfCode.Core
         public ushort? GetValue(Circuit circuit)
         {
             return circuit.GetWireValue(Name);
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 
@@ -60,7 +70,10 @@ namespace AdventOfCode.Core
         public LeftShiftNode(string name, IValueProvider left, IValueProvider right)
             : base(name, left, right)
         {
+            CommandCode = "LSHIFT";
         }
+
+        protected override string CommandCode { get; }
 
         public override ushort? CalculateValue(Circuit circuit)
         {
@@ -73,7 +86,10 @@ namespace AdventOfCode.Core
         public RightShiftNode(string name, IValueProvider left, IValueProvider right)
             : base(name, left, right)
         {
+            CommandCode = "RSHIFT";
         }
+
+        protected override string CommandCode { get; }
 
         public override ushort? CalculateValue(Circuit circuit)
         {
@@ -95,6 +111,11 @@ namespace AdventOfCode.Core
         }
 
         public abstract ushort? CalculateValue(Circuit circuit);
+        protected abstract string CommandCode { get; }
+        public override string ToString()
+        {
+            return $"{Left} {CommandCode} {Right} -> {Name}";
+        }
     }
 
     public class AndNode : BinaryNode
@@ -102,6 +123,7 @@ namespace AdventOfCode.Core
         public AndNode(string name, IValueProvider left, IValueProvider right)
             : base(name, left, right)
         {
+            CommandCode = "AND";
         }
 
         public override ushort? CalculateValue(Circuit circuit)
@@ -110,6 +132,8 @@ namespace AdventOfCode.Core
             var right = Right.GetValue(circuit);
             return (ushort?)(left & right);
         }
+
+        protected override string CommandCode { get; }
     }
 
     public class OrNode : BinaryNode
@@ -117,7 +141,10 @@ namespace AdventOfCode.Core
         public OrNode(string name, IValueProvider left, IValueProvider right)
             : base(name, left, right)
         {
+            CommandCode = "OR";
         }
+
+        protected override string CommandCode { get; }
 
         public override ushort? CalculateValue(Circuit circuit)
         {
@@ -143,6 +170,11 @@ namespace AdventOfCode.Core
             var input = Input.GetValue(circuit);
             return (ushort?)(~ input);
         }
+
+        public override string ToString()
+        {
+            return $"NOT {Input} -> {Name}";
+        }
     }
 
     public class ValueNode : INode
@@ -159,6 +191,11 @@ namespace AdventOfCode.Core
         public ushort? CalculateValue(Circuit circuit)
         {
             return Value.GetValue(circuit);
+        }
+
+        public override string ToString()
+        {
+            return $"{Value} -> {Name}";
         }
     }
 
@@ -263,6 +300,7 @@ namespace AdventOfCode.Core
 
         public ushort? GetWireValue(string name)
         {
+            Console.WriteLine("GetWireValue: " + name);
             return _wires[name].CalculateValue(this);
         }
     }
