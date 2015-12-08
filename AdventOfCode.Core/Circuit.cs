@@ -2,13 +2,169 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace AdventOfCode.Core
 {
+    public interface INode
+    {
+        string Name { get; }
+        ushort? CalculateValue(Circuit circuit);
+    }
+
+    public interface IValueProvider
+    {
+        ushort? GetValue(Circuit circuit);
+    }
+    public class ConstantProvider : IValueProvider
+    {
+        public ushort Value { get; }
+        public ConstantProvider(ushort value)
+        {
+            Value = value;
+        }
+
+        public ushort? GetValue(Circuit circuit)
+        {
+            return Value;
+        }
+    }
+
+    public class NamedNodeProvider : IValueProvider
+    {
+        public string Name { get; }
+        public NamedNodeProvider(string name)
+        {
+            Name = name;
+        }
+
+        public ushort? GetValue(Circuit circuit)
+        {
+            return circuit.GetWireValue(Name);
+        }
+    }
+
+    public static class ValueProviderFactory
+    {
+        public static IValueProvider Create(string input)
+        {
+            ushort value;
+            if (ushort.TryParse(input, out value))
+                return new ConstantProvider(value);
+
+            return new NamedNodeProvider(input);
+        }
+    }
+
+    public class LeftShiftNode : BinaryNode
+    {
+        public LeftShiftNode(string name, IValueProvider left, IValueProvider right)
+            : base(name, left, right)
+        {
+        }
+
+        public override ushort? CalculateValue(Circuit circuit)
+        {
+            return (ushort?)(Left.GetValue(circuit) << Right.GetValue(circuit));
+        }
+    }
+
+    public class RightShiftNode : BinaryNode
+    {
+        public RightShiftNode(string name, IValueProvider left, IValueProvider right)
+            : base(name, left, right)
+        {
+        }
+
+        public override ushort? CalculateValue(Circuit circuit)
+        {
+            return (ushort?)(Left.GetValue(circuit) >> Right.GetValue(circuit));
+        }
+    }
+
+    public abstract class BinaryNode : INode
+    {
+        public string Name { get; }
+        public IValueProvider Left { get; }
+        public IValueProvider Right { get; }
+
+        protected BinaryNode(string name, IValueProvider left, IValueProvider right)
+        {
+            Name = name;
+            Left = left;
+            Right = right;
+        }
+
+        public abstract ushort? CalculateValue(Circuit circuit);
+    }
+
+    public class AndNode : BinaryNode
+    {
+        public AndNode(string name, IValueProvider left, IValueProvider right)
+            : base(name, left, right)
+        {
+        }
+
+        public override ushort? CalculateValue(Circuit circuit)
+        {
+            var left = Left.GetValue(circuit);
+            var right = Right.GetValue(circuit);
+            return (ushort?)(left & right);
+        }
+    }
+
+    public class OrNode : BinaryNode
+    {
+        public OrNode(string name, IValueProvider left, IValueProvider right)
+            : base(name, left, right)
+        {
+        }
+
+        public override ushort? CalculateValue(Circuit circuit)
+        {
+            var left = Left.GetValue(circuit);
+            var right = Right.GetValue(circuit);
+            return (ushort?)(left | right);
+        }
+    }
+
+    public class NotNode : INode
+    {
+        public NotNode(string name, IValueProvider input)
+        {
+            Name = name;
+            Input = input;
+        }
+
+        public string Name { get; }
+        public IValueProvider Input { get; }
+
+        ushort? INode.CalculateValue(Circuit circuit)
+        {
+            var input = Input.GetValue(circuit);
+            return (ushort?)(~ input);
+        }
+    }
+
+    public class ValueNode : INode
+    {
+        public string Name { get; }
+        public IValueProvider Value { get; }
+
+        public ValueNode(string name, IValueProvider value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        public ushort? CalculateValue(Circuit circuit)
+        {
+            return Value.GetValue(circuit);
+        }
+    }
+
     public class Circuit
     {
-        private readonly Dictionary<string, ushort> _wires = new Dictionary<string, ushort>();
+        private readonly Dictionary<string, INode> _wires = new Dictionary<string, INode>();
 
         public void Evaluate(string wire)
         {
@@ -30,28 +186,27 @@ namespace AdventOfCode.Core
 
         private bool ProcessBinaryOperation(string wire)
         {
-            var match = Regex.Match(wire, @"^(?<lhs>[a-z]+) (?<op>[A-Z]+) (?<rhs>[a-z]+|\d+) -> (?<out>[a-z]+)$");
+            var match = Regex.Match(wire, @"^(?<lhs>[a-z]+|\d+) (?<op>[A-Z]+) (?<rhs>[a-z]+|\d+) -> (?<out>[a-z]+)$");
             if (match.Success)
             {
                 var op = match.Groups["op"].Value;
-                var lhs = match.Groups["lhs"].Value;
-                var rhs = match.Groups["rhs"].Value;
+                var lhs = ValueProviderFactory.Create(match.Groups["lhs"].Value);
+                var rhs = ValueProviderFactory.Create(match.Groups["rhs"].Value);
                 var output = match.Groups["out"].Value;
 
-                var input = _wires[lhs];
                 switch (op)
                 {
                     case "AND":
-                        _wires[output] = (ushort)(input & _wires[rhs]);
+                        _wires[output] = new AndNode(output, lhs, rhs);
                         break;
                     case "OR":
-                        _wires[output] = (ushort)(input | _wires[rhs]);
+                        _wires[output] = new OrNode(output, lhs, rhs);
                         break;
                     case "LSHIFT":
-                        _wires[output] = (ushort)(input << ushort.Parse(rhs));
+                        _wires[output] = new LeftShiftNode(output, lhs, rhs);
                         break;
                     case "RSHIFT":
-                        _wires[output] = (ushort)(input >> ushort.Parse(rhs));
+                        _wires[output] = new RightShiftNode(output, lhs, rhs);
                         break;
                     default:
                         throw new InvalidOperationException("Did not recognize binary operator " + op);
@@ -65,17 +220,17 @@ namespace AdventOfCode.Core
 
         private bool ProcessUnaryOperation(string wire)
         {
-            var match = Regex.Match(wire, @"^(NOT) ([a-z]+) -> ([a-z]+)$");
+            var match = Regex.Match(wire, @"^(?<op>NOT) (?<lhs>[a-z]+) -> (?<out>[a-z]+)$");
             if (match.Success)
             {
-                var op = match.Groups[1].Value;
-                var input = match.Groups[2].Value;
-                var output = match.Groups[3].Value;
+                var op = match.Groups["op"].Value;
+                var input = ValueProviderFactory.Create(match.Groups["lhs"].Value);
+                var output = match.Groups["out"].Value;
 
                 switch (op)
                 {
                     case "NOT":
-                        _wires[output] =(ushort)(~_wires[input]);
+                        _wires[output] = new NotNode(output, input);
                         break;
                     default:
                         throw new InvalidOperationException("Unreconized unary operator " + op);
@@ -89,10 +244,12 @@ namespace AdventOfCode.Core
 
         private bool ProcessAssignment(string wire)
         {
-            var match = Regex.Match(wire, @"^(\d+) -> ([a-z]+)$");
+            var match = Regex.Match(wire, @"^(?<val>[a-z]+|\d+) -> (?<out>[a-z]+)$");
             if (match.Success)
             {
-                _wires[match.Groups[2].Value] = ushort.Parse(match.Groups[1].Value);
+                var value = ValueProviderFactory.Create(match.Groups["val"].Value);
+                var output = match.Groups["out"].Value;
+                _wires[output] = new ValueNode(output, value);
                 return true;
             }
 
@@ -104,9 +261,9 @@ namespace AdventOfCode.Core
             return _wires.Keys;
         }
 
-        public ushort GetWireValue(string name)
+        public ushort? GetWireValue(string name)
         {
-            return _wires[name];
+            return _wires[name].CalculateValue(this);
         }
     }
 }
