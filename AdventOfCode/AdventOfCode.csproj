@@ -60,6 +60,7 @@
     <Content Include="InputData\Day3.txt" />
     <Content Include="InputData\LightCommands.txt" />
     <Content Include="InputData\NaughtyWords.txt" />
+    <Content Include="InputData\Wires.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdventOfCode.Core\AdventOfCode.Core.csproj">

@@ -44,6 +44,7 @@
     <Compile Include="Challenge3.cs" />
     <Compile Include="ChristmasLights.cs" />
     <Compile Include="InputData.cs" />
+    <Compile Include="Circuit.cs" />
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
