@@ -110,18 +110,16 @@ namespace AdventOfCode.Core
 
             private State _state = State.Beginnng;
             private readonly StringBuilder _buffer = new StringBuilder(25);
-            private int _processedCharacters = 0;
             private bool _hasMore = true;
 
             public UnEscapedStringResult Escape(string input)
             {
                 _buffer.Clear();
-                _processedCharacters = 0;
 
                 using (var enumerator = input.GetEnumerator())
                     ProcessStream(enumerator);
 
-                return new UnEscapedStringResult(_buffer.ToString(), _processedCharacters);
+                return new UnEscapedStringResult(_buffer.ToString(), input.Length);
             }
 
             private void ProcessStream(CharEnumerator enumerator)
@@ -165,7 +163,6 @@ namespace AdventOfCode.Core
                 _buffer.Append((char)int.Parse(hex, NumberStyles.HexNumber));
 
                 _state = State.Normal;
-                _processedCharacters += 2;
             }
 
             private void ProcessEscape(CharEnumerator enumerator)
@@ -187,7 +184,6 @@ namespace AdventOfCode.Core
                         break;
                 }
 
-                _processedCharacters++;
             }
 
             private void ProcessNormal(CharEnumerator enumerator)
@@ -207,7 +203,6 @@ namespace AdventOfCode.Core
                         break;
                 }
 
-                _processedCharacters++;
             }
 
             private void ProcessBeginning(CharEnumerator enumerator)
@@ -216,7 +211,6 @@ namespace AdventOfCode.Core
                 _hasMore = enumerator.MoveNext();
                 Debug.Assert(enumerator.Current == '"');
 
-                _processedCharacters++;
                 _state = State.Normal;
             }
         }
