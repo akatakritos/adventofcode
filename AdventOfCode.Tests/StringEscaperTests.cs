@@ -16,36 +16,36 @@ namespace AdventOfCode.Tests
         [Fact]
         public void EmptyStringIsTwoCharactersOfCode()
         {
-            var result = StringEscaper.Escape(@"""""");
-            Check.That(result).IsEqualTo(new StringEscaperResult("", 2));
+            var result = StringEscaper.UnEscape(@"""""");
+            Check.That(result).IsEqualTo(new UnEscapedStringResult("", 2));
         }
 
         [Fact]
         public void SimpleString()
         {
-            var result = StringEscaper.Escape(@"""abc""");
-            Check.That(result).IsEqualTo(new StringEscaperResult("abc", 5));
+            var result = StringEscaper.UnEscape(@"""abc""");
+            Check.That(result).IsEqualTo(new UnEscapedStringResult("abc", 5));
         }
 
         [Fact]
         public void EscapedDoubleQuote()
         {
-            var result = StringEscaper.Escape(@"""aaa\""aaa""");
-            Check.That(result).IsEqualTo(new StringEscaperResult("aaa\"aaa", 10));
+            var result = StringEscaper.UnEscape(@"""aaa\""aaa""");
+            Check.That(result).IsEqualTo(new UnEscapedStringResult("aaa\"aaa", 10));
         }
 
         [Fact]
         public void EscapedHexCodes()
         {
-            var result = StringEscaper.Escape(@"""\x27""");
-            Check.That(result).IsEqualTo(new StringEscaperResult("'", 6));
+            var result = StringEscaper.UnEscape(@"""\x27""");
+            Check.That(result).IsEqualTo(new UnEscapedStringResult("'", 6));
         }
 
         [Fact]
         public void MixedString()
         {
-            var result = StringEscaper.Escape(@"""byc\x9dyxuafof\\\xa6uf\\axfozomj\\olh\x6a""");
-            Check.That(result).IsEqualTo(new StringEscaperResult("byc\u009dyxuafof\\¦uf\\axfozomj\\olhj", 43));
+            var result = StringEscaper.UnEscape(@"""byc\x9dyxuafof\\\xa6uf\\axfozomj\\olh\x6a""");
+            Check.That(result).IsEqualTo(new UnEscapedStringResult("byc\u009dyxuafof\\¦uf\\axfozomj\\olhj", 43));
         }
     }
 }

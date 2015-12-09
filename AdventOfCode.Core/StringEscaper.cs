@@ -41,14 +41,14 @@ Your task is to find the total number of characters to represent the newly encod
 */
 namespace AdventOfCode.Core
 {
-    public struct StringEscaperResult : IEquatable<StringEscaperResult>
+    public struct UnEscapedStringResult : IEquatable<UnEscapedStringResult>
     {
         public string EscapedString { get; }
         public int CharactersOfCode { get; }
 
         public int CharactersInEscapedString => EscapedString.Length;
 
-        public StringEscaperResult(string escapedString, int charactersOfCode)
+        public UnEscapedStringResult(string escapedString, int charactersOfCode)
         {
             EscapedString = escapedString;
             CharactersOfCode = charactersOfCode;
@@ -60,7 +60,7 @@ namespace AdventOfCode.Core
         }
 
         #region R# equality
-        public bool Equals(StringEscaperResult other)
+        public bool Equals(UnEscapedStringResult other)
         {
             return string.Equals(EscapedString, other.EscapedString) && CharactersOfCode == other.CharactersOfCode;
         }
@@ -71,7 +71,7 @@ namespace AdventOfCode.Core
             {
                 return false;
             }
-            return obj is StringEscaperResult && Equals((StringEscaperResult)obj);
+            return obj is UnEscapedStringResult && Equals((UnEscapedStringResult)obj);
         }
 
         public override int GetHashCode()
@@ -82,12 +82,12 @@ namespace AdventOfCode.Core
             }
         }
 
-        public static bool operator ==(StringEscaperResult left, StringEscaperResult right)
+        public static bool operator ==(UnEscapedStringResult left, UnEscapedStringResult right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(StringEscaperResult left, StringEscaperResult right)
+        public static bool operator !=(UnEscapedStringResult left, UnEscapedStringResult right)
         {
             return !left.Equals(right);
         }
@@ -113,7 +113,7 @@ namespace AdventOfCode.Core
             private int _processedCharacters = 0;
             private bool _hasMore = true;
 
-            public StringEscaperResult Escape(string input)
+            public UnEscapedStringResult Escape(string input)
             {
                 _buffer.Clear();
                 _processedCharacters = 0;
@@ -121,7 +121,7 @@ namespace AdventOfCode.Core
                 using (var enumerator = input.GetEnumerator())
                     ProcessStream(enumerator);
 
-                return new StringEscaperResult(_buffer.ToString(), _processedCharacters);
+                return new UnEscapedStringResult(_buffer.ToString(), _processedCharacters);
             }
 
             private void ProcessStream(CharEnumerator enumerator)
@@ -221,10 +221,11 @@ namespace AdventOfCode.Core
             }
         }
 
-        public static StringEscaperResult Escape(string input)
+        public static UnEscapedStringResult UnEscape(string input)
         {
             var machine = new EscapingStateMachine();
             return machine.Escape(input);
         }
+
     }
 }

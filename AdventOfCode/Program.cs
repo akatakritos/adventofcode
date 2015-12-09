@@ -51,7 +51,7 @@ namespace AdventOfCode
             //Console.WriteLine($"After resetting input b, the new value of a is {a}");
 
             int total = InputData.LoadLines("escapedstrings.txt")
-                .Select(StringEscaper.Escape)
+                .Select(StringEscaper.UnEscape)
                 .Sum(r => r.CharactersOfCode - r.CharactersInEscapedString);
             Console.WriteLine($"There are {total} differences between number of characters of code and number of characters in escaped strings.");
 
