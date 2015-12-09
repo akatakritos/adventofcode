@@ -10,7 +10,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests
 {
-    public class LogicGatesTests
+    public class CircuitTests
     {
         [Fact]
         public void Example()

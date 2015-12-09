@@ -43,11 +43,13 @@
     <Compile Include="AdventCoins.cs" />
     <Compile Include="Challenge3.cs" />
     <Compile Include="ChristmasLights.cs" />
+    <Compile Include="CircuitNodes.cs" />
     <Compile Include="InputData.cs" />
     <Compile Include="Circuit.cs" />
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueProviders.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
