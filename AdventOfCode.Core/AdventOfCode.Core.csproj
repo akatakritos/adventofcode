@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdventCoins.cs" />
-    <Compile Include="Challenge3.cs" />
+    <Compile Include="DrunkElfDirections.cs" />
     <Compile Include="ChristmasLights.cs" />
     <Compile Include="CircuitNodes.cs" />
     <Compile Include="InputData.cs" />
@@ -49,7 +49,9 @@
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SantaElevator.cs" />
     <Compile Include="ValueProviders.cs" />
+    <Compile Include="WrappingPaper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,44 +10,44 @@ using Xunit;
 
 namespace AdventOfCode.Tests
 {
-    public class Challenge3Tests
+    public class DrunkElfDirectionTests
     {
         [Fact]
         public void OneLocationIsTwoDeliveries()
         {
-            Check.That(Challenge3.NumberOfHousesVisited(">")).IsEqualTo(2);
+            Check.That(DrunkElfDirections.NumberOfHousesVisited(">")).IsEqualTo(2);
         }
 
         [Fact]
         public void SquareDirectionsIsFourHouses()
         {
-            Check.That(Challenge3.NumberOfHousesVisited("^>v<")).IsEqualTo(4);
+            Check.That(DrunkElfDirections.NumberOfHousesVisited("^>v<")).IsEqualTo(4);
         }
 
         [Fact]
         public void ZigZagIsTwoHouses()
         {
-            Check.That(Challenge3.NumberOfHousesVisited("^v^v^v^v^v")).IsEqualTo(2);
+            Check.That(DrunkElfDirections.NumberOfHousesVisited("^v^v^v^v^v")).IsEqualTo(2);
         }
 
         [Fact]
         public void Robo_OppositeDirectsGetsThreeHouses()
         {
-            Check.That(Challenge3.NumberOfHousesVisitedWithRoboSantaToo("^v"))
+            Check.That(DrunkElfDirections.NumberOfHousesVisitedWithRoboSantaToo("^v"))
                 .IsEqualTo(3);
         }
 
         [Fact]
         public void Robo_BothZigZagIsThreeHouses()
         {
-            Check.That(Challenge3.NumberOfHousesVisitedWithRoboSantaToo("^>v<"))
+            Check.That(DrunkElfDirections.NumberOfHousesVisitedWithRoboSantaToo("^>v<"))
                 .IsEqualTo(3);
         }
 
         [Fact]
         public void Robo_BothGoStraightIsElevenHouses()
         {
-            Check.That(Challenge3.NumberOfHousesVisitedWithRoboSantaToo("^v^v^v^v^v"))
+            Check.That(DrunkElfDirections.NumberOfHousesVisitedWithRoboSantaToo("^v^v^v^v^v"))
                 .IsEqualTo(11);
         }
     }

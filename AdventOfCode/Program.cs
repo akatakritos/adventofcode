@@ -11,9 +11,9 @@ namespace AdventOfCode
     {
         static void Main()
         {
-            //Day1Part1();
-            //Day1Part2();
-            //Day2();
+            //SantaElevator.WhereDidHeGo();
+            //SantaElevator.WhenEnteredBasement();
+            //WrappingPaper.Calculate();
 
             //var result = Challenge3.NumberOfHousesVisited(InputData.Load("Day3.txt"));
             //Console.WriteLine($"Santa visited {result} houses.");
@@ -52,67 +52,6 @@ namespace AdventOfCode
 
 
             Console.ReadKey();
-        }
-
-        public static void Day1Part1()
-        {
-            var s = InputData.Load("Day1Part1.txt");
-            int up = s.Count(c => c == '(');
-            int down = s.Count(c => c == ')');
-            Console.WriteLine(up - down);
-        }
-
-        public static void Day1Part2()
-        {
-            var s = InputData.Load("Day1Part2.txt");
-            int position = 0;
-            for (int i = 0; i < s.Length; i++)
-            {
-                if (s[i] == '(')
-                    position++;
-                else if (s[i] == ')')
-                    position--;
-
-                if (position == -1)
-                {
-                    Console.WriteLine($"Entered basement at step {i+1}");
-                    return;
-                }
-            }
-        }
-
-        public static void Day2()
-        {
-            var input = InputData.LoadLines("Day2Part1.txt");
-            //var input = new[] { "1x1x10" };
-            int totalRibbon = 0;
-            int totalPaper = 0;
-            foreach (var line in input)
-            {
-                var sizes = line.Split('x').Select(int.Parse).ToArray();
-                int l = sizes[0];
-                int w = sizes[1];
-                int h = sizes[2];
-
-                //smallest side:
-                Array.Sort(sizes);
-                int s1 = sizes[0];
-                int s2 = sizes[1];
-
-                int surfaceArea = 2 * l * w + 2 * w * h + 2 * h * l;
-                int areaSmallestSide = s1 * s2;
-                int shortestPermiter = 2 * s1 + 2 * s2;
-                int volume = l * w * h;
-
-                int paper = surfaceArea + areaSmallestSide;
-                int ribbon = shortestPermiter + volume;
-
-
-                totalPaper += paper;
-                totalRibbon += ribbon;
-            }
-
-            Console.WriteLine($"The elves should buy {totalPaper} feet of paper and {totalRibbon} ribbon.");
         }
     }
 }
