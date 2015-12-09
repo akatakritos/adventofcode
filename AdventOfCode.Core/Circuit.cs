@@ -9,11 +9,13 @@ namespace AdventOfCode.Core
     {
         string Name { get; }
         ushort? CalculateValue(Circuit circuit);
+        void Reset();
     }
 
     public interface IValueProvider
     {
         ushort? GetValue(Circuit circuit);
+        void Reset();
     }
     public class ConstantProvider : IValueProvider
     {
@@ -26,6 +28,11 @@ namespace AdventOfCode.Core
         public ushort? GetValue(Circuit circuit)
         {
             return Value;
+        }
+
+        public void Reset()
+        {
+            // no op
         }
 
         public override string ToString()
@@ -49,6 +56,11 @@ namespace AdventOfCode.Core
                 return _value;
 
             return _value = circuit.GetWireValue(Name);
+        }
+
+        public void Reset()
+        {
+            _value = null;
         }
 
         public override string ToString()
@@ -115,6 +127,13 @@ namespace AdventOfCode.Core
         }
 
         public abstract ushort? CalculateValue(Circuit circuit);
+
+        public void Reset()
+        {
+            Left.Reset();
+            Right.Reset();
+        }
+
         protected abstract string CommandCode { get; }
         public override string ToString()
         {
@@ -175,6 +194,11 @@ namespace AdventOfCode.Core
             return (ushort?)(~ input);
         }
 
+        public void Reset()
+        {
+            Input.Reset();
+        }
+
         public override string ToString()
         {
             return $"NOT {Input} -> {Name}";
@@ -195,6 +219,11 @@ namespace AdventOfCode.Core
         public ushort? CalculateValue(Circuit circuit)
         {
             return Value.GetValue(circuit);
+        }
+
+        public void Reset()
+        {
+            Value.Reset();
         }
 
         public override string ToString()
@@ -304,8 +333,18 @@ namespace AdventOfCode.Core
 
         public ushort? GetWireValue(string name)
         {
-            Console.WriteLine("GetWireValue: " + name);
             return _wires[name].CalculateValue(this);
+        }
+
+        public void Reset()
+        {
+            foreach(var node in _wires.Values)
+                node.Reset();
+        }
+
+        public void OverrideInputNode(string node, ushort value)
+        {
+            _wires[node] = new ValueNode(node, new ConstantProvider(value));
         }
     }
 }

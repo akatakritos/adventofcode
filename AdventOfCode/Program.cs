@@ -43,6 +43,12 @@ namespace AdventOfCode
             var a = circuit.GetWireValue("a");
             Console.WriteLine($"The wire 'a' has value {a}");
 
+            circuit.OverrideInputNode("b", a.Value);
+            circuit.Reset();
+            a = circuit.GetWireValue("a");
+            Console.WriteLine($"After resetting input b, the new value of a is {a}");
+
+
             Console.ReadKey();
         }
 
