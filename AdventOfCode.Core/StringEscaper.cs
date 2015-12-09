@@ -221,5 +221,23 @@ namespace AdventOfCode.Core
             return machine.Escape(input);
         }
 
+        public static string Escape(string input)
+        {
+            var sb = new StringBuilder();
+            sb.Append("\"");
+            foreach (var c in input)
+            {
+                if (c == '"')
+                    sb.Append("\\\"");
+                else if (c == '\\')
+                    sb.Append("\\\\");
+                else
+                    sb.Append(c);
+            }
+            sb.Append("\"");
+
+            return sb.ToString();
+        }
+
     }
 }

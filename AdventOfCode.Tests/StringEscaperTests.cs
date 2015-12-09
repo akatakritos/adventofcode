@@ -47,5 +47,53 @@ namespace AdventOfCode.Tests
             var result = StringEscaper.UnEscape(@"""byc\x9dyxuafof\\\xa6uf\\axfozomj\\olh\x6a""");
             Check.That(result).IsEqualTo(new UnEscapedStringResult("byc\u009dyxuafof\\¦uf\\axfozomj\\olhj", 43));
         }
+
+        [Fact]
+        public void EncodeEmptyString()
+        {
+            var input = @"""""";
+
+            var result = StringEscaper.Escape(input);
+
+            Check.That(input).HasSize(2);
+            Check.That(result).HasSize(6);
+            Check.That(result).IsEqualTo("\"\\\"\\\"\"");
+        }
+
+        [Fact]
+        public void EncodesSimpleString()
+        {
+            var input = "\"abc\"";
+
+            var result = StringEscaper.Escape(input);
+
+            Check.That(input).HasSize(5);
+            Check.That(result).HasSize(9);
+            Check.That(result).IsEqualTo(@"""\""abc\""""");
+        }
+
+        [Fact]
+        public void EscapesStringWithEscapedQuote()
+        {
+            var input = "\"aaa\\\"aaa\"";
+
+            var result = StringEscaper.Escape(input);
+
+            Check.That(input).HasSize(10);
+            Check.That(result).HasSize(16);
+            Check.That(result).IsEqualTo(@"""\""aaa\\\""aaa\""""");
+        }
+
+        [Fact]
+        public void EscapesStringWithEscapedHex()
+        {
+            var input = @"""\x27""";
+
+            var result = StringEscaper.Escape(input);
+
+            Check.That(input).HasSize(6);
+            Check.That(result).HasSize(11);
+            Check.That(result).IsEqualTo(@"""\""\\x27\""""");
+        }
     }
 }

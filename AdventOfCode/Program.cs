@@ -55,6 +55,11 @@ namespace AdventOfCode
                 .Sum(r => r.CharactersOfCode - r.CharactersInEscapedString);
             Console.WriteLine($"There are {total} differences between number of characters of code and number of characters in escaped strings.");
 
+            var total2 = InputData.LoadLines("escapedstrings.txt")
+                .Select(s => StringEscaper.Escape(s).Length - s.Length)
+                .Sum();
+            Console.WriteLine($"That weird sum of escaped differences is {total2} characters.");
+
 
             Console.ReadKey();
         }
