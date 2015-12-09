@@ -10,9 +10,9 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            Day1Part1();
-            Day1Part2();
-            Day2();
+            //Day1Part1();
+            //Day1Part2();
+            //Day2();
 
             //var result = Challenge3.NumberOfHousesVisited(InputData.Load("Day3.txt"));
             //Console.WriteLine($"Santa visited {result} houses.");
