@@ -67,6 +67,7 @@
     <Compile Include="NicerStringTests.cs" />
     <Compile Include="NiceStringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringEscaperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

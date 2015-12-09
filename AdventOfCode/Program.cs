@@ -39,16 +39,21 @@ namespace AdventOfCode
             //var brightness = ChristmasLights.GetTotalBrightnessFromAncientNordicElvish(InputData.LoadLines("LightCommands.txt"));
             //Console.WriteLine($"After translating to nordic elvish, the total brightness is {brightness}");
 
-            var circuit = new Circuit();
-            circuit.EvaluateAll(InputData.LoadLines("Wires.txt"));
-            var a = circuit.GetWireValue("a");
-            Console.WriteLine($"The wire 'a' has value {a}");
+            //var circuit = new Circuit();
+            //circuit.EvaluateAll(InputData.LoadLines("Wires.txt"));
+            //var a = circuit.GetWireValue("a");
+            //Console.WriteLine($"The wire 'a' has value {a}");
 
-            Debug.Assert(a != null, "a != null");
-            circuit.OverrideInputNode("b", a.Value);
-            circuit.Reset();
-            a = circuit.GetWireValue("a");
-            Console.WriteLine($"After resetting input b, the new value of a is {a}");
+            //Debug.Assert(a != null, "a != null");
+            //circuit.OverrideInputNode("b", a.Value);
+            //circuit.Reset();
+            //a = circuit.GetWireValue("a");
+            //Console.WriteLine($"After resetting input b, the new value of a is {a}");
+
+            int total = InputData.LoadLines("escapedstrings.txt")
+                .Select(StringEscaper.Escape)
+                .Sum(r => r.CharactersOfCode - r.CharactersInEscapedString);
+            Console.WriteLine($"There are {total} differences between number of characters of code and number of characters in escaped strings.");
 
 
             Console.ReadKey();
