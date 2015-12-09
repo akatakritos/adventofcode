@@ -63,7 +63,7 @@
     <Compile Include="AdventCoinsTests.cs" />
     <Compile Include="Challenge3Tests.cs" />
     <Compile Include="ChristmasLightTests.cs" />
-    <Compile Include="LogicGatesTests.cs" />
+    <Compile Include="CircuitTests.cs" />
     <Compile Include="NicerStringTests.cs" />
     <Compile Include="NiceStringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

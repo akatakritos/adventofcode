@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using AdventOfCode.Core;
@@ -8,7 +9,7 @@ namespace AdventOfCode
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //Day1Part1();
             //Day1Part2();
@@ -43,6 +44,7 @@ namespace AdventOfCode
             var a = circuit.GetWireValue("a");
             Console.WriteLine($"The wire 'a' has value {a}");
 
+            Debug.Assert(a != null, "a != null");
             circuit.OverrideInputNode("b", a.Value);
             circuit.Reset();
             a = circuit.GetWireValue("a");
