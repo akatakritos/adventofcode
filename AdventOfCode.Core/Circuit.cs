@@ -42,9 +42,13 @@ namespace AdventOfCode.Core
             Name = name;
         }
 
+        private ushort? _value;
         public ushort? GetValue(Circuit circuit)
         {
-            return circuit.GetWireValue(Name);
+            if (_value.HasValue)
+                return _value;
+
+            return _value = circuit.GetWireValue(Name);
         }
 
         public override string ToString()
