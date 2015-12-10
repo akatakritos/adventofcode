@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 using AdventOfCode.Core;
@@ -50,16 +49,24 @@ namespace AdventOfCode
             //a = circuit.GetWireValue("a");
             //Console.WriteLine($"After resetting input b, the new value of a is {a}");
 
-            int total = InputData.LoadLines("escapedstrings.txt")
-                .Select(StringEscaper.UnEscape)
-                .Sum(r => r.CharactersOfCode - r.CharactersInEscapedString);
-            Console.WriteLine($"There are {total} differences between number of characters of code and number of characters in escaped strings.");
+            //int total = InputData.LoadLines("escapedstrings.txt")
+            //    .Select(StringEscaper.UnEscape)
+            //    .Sum(r => r.CharactersOfCode - r.CharactersInEscapedString);
+            //Console.WriteLine($"There are {total} differences between number of characters of code and number of characters in escaped strings.");
 
-            var total2 = InputData.LoadLines("escapedstrings.txt")
-                .Select(s => StringEscaper.Escape(s).Length - s.Length)
-                .Sum();
-            Console.WriteLine($"That weird sum of escaped differences is {total2} characters.");
+            //var total2 = InputData.LoadLines("escapedstrings.txt")
+            //    .Select(s => StringEscaper.Escape(s).Length - s.Length)
+            //    .Sum();
+            //Console.WriteLine($"That weird sum of escaped differences is {total2} characters.");
 
+            var navigator = new TravelingSanta();
+            navigator.AddDistances(InputData.LoadLines("citydistances.txt"));
+
+            var route = navigator.FindShortestRoute();
+            Console.WriteLine($"Santas best route is {route} for {route.TotalDistance} miles.");
+
+            route = navigator.FindLongestRoute();
+            Console.WriteLine($"Santas worst route is {route} for {route.TotalDistance} miles.");
 
             Console.ReadKey();
         }
