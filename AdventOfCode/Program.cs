@@ -59,14 +59,19 @@ namespace AdventOfCode
             //    .Sum();
             //Console.WriteLine($"That weird sum of escaped differences is {total2} characters.");
 
-            var navigator = new TravelingSanta();
-            navigator.AddDistances(InputData.LoadLines("citydistances.txt"));
+            //var navigator = new TravelingSanta();
+            //navigator.AddDistances(InputData.LoadLines("citydistances.txt"));
 
-            var route = navigator.FindShortestRoute();
-            Console.WriteLine($"Santas best route is {route} for {route.TotalDistance} miles.");
+            //var route = navigator.FindShortestRoute();
+            //Console.WriteLine($"Santas best route is {route} for {route.TotalDistance} miles.");
 
-            route = navigator.FindLongestRoute();
-            Console.WriteLine($"Santas worst route is {route} for {route.TotalDistance} miles.");
+            //route = navigator.FindLongestRoute();
+            //Console.WriteLine($"Santas worst route is {route} for {route.TotalDistance} miles.");
+
+            var result = LookAndSay.Transform("1321131112", 40);
+            Console.WriteLine($"1321131112 transformed 40 times has a length of {result.Length}");
+            result = LookAndSay.Transform("1321131112", 50);
+            Console.WriteLine($"1321131112 transformed 50 times has a length of {result.Length}");
 
             Console.ReadKey();
         }

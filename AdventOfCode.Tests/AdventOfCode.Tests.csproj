@@ -64,6 +64,7 @@
     <Compile Include="DrunkElfDirectionTests.cs" />
     <Compile Include="ChristmasLightTests.cs" />
     <Compile Include="CircuitTests.cs" />
+    <Compile Include="LookAndSayTests.cs" />
     <Compile Include="NicerStringTests.cs" />
     <Compile Include="NiceStringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

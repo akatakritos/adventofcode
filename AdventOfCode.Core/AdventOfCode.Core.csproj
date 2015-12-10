@@ -46,6 +46,7 @@
     <Compile Include="CircuitNodes.cs" />
     <Compile Include="InputData.cs" />
     <Compile Include="Circuit.cs" />
+    <Compile Include="LookAndSay.cs" />
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
