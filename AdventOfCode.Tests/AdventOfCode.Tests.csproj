@@ -68,6 +68,7 @@
     <Compile Include="NiceStringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringEscaperTests.cs" />
+    <Compile Include="TravelingSantaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
