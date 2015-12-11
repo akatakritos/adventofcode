@@ -49,6 +49,7 @@
     <Compile Include="LookAndSay.cs" />
     <Compile Include="NicerString.cs" />
     <Compile Include="NiceString.cs" />
+    <Compile Include="PasswordGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SantaElevator.cs" />
     <Compile Include="StringEscaper.cs" />

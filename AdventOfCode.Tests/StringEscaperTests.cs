@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 
 using AdventOfCode.Core;
 
@@ -51,7 +50,7 @@ namespace AdventOfCode.Tests
         [Fact]
         public void EncodeEmptyString()
         {
-            var input = @"""""";
+            const string input = @"""""";
 
             var result = StringEscaper.Escape(input);
 
@@ -63,7 +62,7 @@ namespace AdventOfCode.Tests
         [Fact]
         public void EncodesSimpleString()
         {
-            var input = "\"abc\"";
+            const string input = "\"abc\"";
 
             var result = StringEscaper.Escape(input);
 
@@ -75,7 +74,7 @@ namespace AdventOfCode.Tests
         [Fact]
         public void EscapesStringWithEscapedQuote()
         {
-            var input = "\"aaa\\\"aaa\"";
+            const string input = "\"aaa\\\"aaa\"";
 
             var result = StringEscaper.Escape(input);
 
@@ -87,7 +86,7 @@ namespace AdventOfCode.Tests
         [Fact]
         public void EscapesStringWithEscapedHex()
         {
-            var input = @"""\x27""";
+            const string input = @"""\x27""";
 
             var result = StringEscaper.Escape(input);
 

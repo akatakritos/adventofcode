@@ -67,6 +67,7 @@
     <Compile Include="LookAndSayTests.cs" />
     <Compile Include="NicerStringTests.cs" />
     <Compile Include="NiceStringTests.cs" />
+    <Compile Include="PasswordGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringEscaperTests.cs" />
     <Compile Include="TravelingSantaTests.cs" />

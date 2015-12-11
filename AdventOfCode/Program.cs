@@ -68,10 +68,16 @@ namespace AdventOfCode
             //route = navigator.FindLongestRoute();
             //Console.WriteLine($"Santas worst route is {route} for {route.TotalDistance} miles.");
 
-            var result = LookAndSay.Transform("1321131112", 40);
-            Console.WriteLine($"1321131112 transformed 40 times has a length of {result.Length}");
-            result = LookAndSay.Transform("1321131112", 50);
-            Console.WriteLine($"1321131112 transformed 50 times has a length of {result.Length}");
+            //var result = LookAndSay.Transform("1321131112", 40);
+            //Console.WriteLine($"1321131112 transformed 40 times has a length of {result.Length}");
+            //result = LookAndSay.Transform("1321131112", 50);
+            //Console.WriteLine($"1321131112 transformed 50 times has a length of {result.Length}");
+
+
+            var next = PasswordGenerator.FindNextPassword("vzbxkghb");
+            Console.WriteLine(next);
+            next = PasswordGenerator.FindNextPassword(next);
+            Console.WriteLine(next);
 
             Console.ReadKey();
         }
