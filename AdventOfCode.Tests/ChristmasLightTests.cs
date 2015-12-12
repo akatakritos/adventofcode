@@ -38,8 +38,4 @@ namespace AdventOfCode.Tests
 
         }
     }
-
-    class ChristmasLightTests
-    {
-    }
 }
