@@ -74,10 +74,16 @@ namespace AdventOfCode
             //Console.WriteLine($"1321131112 transformed 50 times has a length of {result.Length}");
 
 
-            var next = PasswordGenerator.FindNextPassword("vzbxkghb");
-            Console.WriteLine(next);
-            next = PasswordGenerator.FindNextPassword(next);
-            Console.WriteLine(next);
+            //var next = PasswordGenerator.FindNextPassword("vzbxkghb");
+            //Console.WriteLine(next);
+            //next = PasswordGenerator.FindNextPassword(next);
+            //Console.WriteLine(next);
+
+            var sum = ElfAccounting.SumAllNumbers(InputData.Load("elf-accounting.json"));
+            Console.WriteLine(sum);
+
+            sum = ElfAccounting.SumAllNonRedObjects(InputData.Load("elf-accounting.json"));
+            Console.WriteLine(sum);
 
             Console.ReadKey();
         }
