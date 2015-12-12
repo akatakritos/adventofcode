@@ -9,10 +9,14 @@ namespace AdventOfCode.Core
     {
         public static bool IsValid(string password)
         {
-            var sb = new StringBuilder(password);
-            return !ContainsBadLetter(sb)
-                   && ContainsTwoPairs(sb)
-                   && ContainsStraight(sb);
+            return IsValid(new StringBuilder(password));
+        }
+
+        private static bool IsValid(StringBuilder buffer)
+        {
+            return !ContainsBadLetter(buffer)
+                   && ContainsTwoPairs(buffer)
+                   && ContainsStraight(buffer);
         }
 
         private static bool ContainsBadLetter(StringBuilder password)
@@ -62,14 +66,14 @@ namespace AdventOfCode.Core
 
         public static string FindNextPassword(string current)
         {
-            var sb = new StringBuilder(current);
+            var buffer = new StringBuilder(current);
             do
             {
-                Increment(sb);
+                Increment(buffer);
 
-            } while (!IsValid(sb.ToString()));
+            } while (!IsValid(buffer));
 
-            return sb.ToString();
+            return buffer.ToString();
         }
 
         private static void Increment(StringBuilder sb)
