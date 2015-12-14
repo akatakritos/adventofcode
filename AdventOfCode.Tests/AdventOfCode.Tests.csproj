@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdventCoinsTests.cs" />
+    <Compile Include="DinnerTableTests.cs" />
     <Compile Include="DrunkElfDirectionTests.cs" />
     <Compile Include="ChristmasLightTests.cs" />
     <Compile Include="CircuitTests.cs" />

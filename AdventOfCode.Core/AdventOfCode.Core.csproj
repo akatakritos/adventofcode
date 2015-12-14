@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdventCoins.cs" />
+    <Compile Include="DinnerTable.cs" />
     <Compile Include="DrunkElfDirections.cs" />
     <Compile Include="ChristmasLights.cs" />
     <Compile Include="CircuitNodes.cs" />
