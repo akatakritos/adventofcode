@@ -85,16 +85,27 @@ namespace AdventOfCode
             //sum = ElfAccounting.SumAllNonRedObjects(InputData.Load("elf-accounting.json"));
             //Console.WriteLine(sum);
 
-            var table = new DinnerTable();
-            table.AddGuestRequirements(SeatingRequirement.ParseMultiple(InputData.LoadLines("dinnertable.txt")));
-            var result = table.DetermineOptimalArrangement();
-            var total = result.GetTotalHappiness();
-            Console.WriteLine(total);
+            //var table = new DinnerTable();
+            //table.AddGuestRequirements(SeatingRequirement.ParseMultiple(InputData.LoadLines("dinnertable.txt")));
+            //var result = table.DetermineOptimalArrangement();
+            //var total = result.GetTotalHappiness();
+            //Console.WriteLine(total);
 
-            table.AddSelf();
-            var result1 = table.DetermineOptimalArrangement();
-            var total1 = result1.GetTotalHappiness();
-            Console.WriteLine($"New total is {total1} which is {total1 - total} different.");
+            //table.AddSelf();
+            //var result1 = table.DetermineOptimalArrangement();
+            //var total1 = result1.GetTotalHappiness();
+            //Console.WriteLine($"New total is {total1} which is {total1 - total} different.");
+
+            var race = new ReindeerRace();
+            race.AddMultipleReindeer(InputData.LoadLines("reindeer.txt"));
+
+            var winner = race.GetWinner(2503);
+            Console.WriteLine($"{winner.Name} at {winner.Distance} km");
+
+            race = new ReindeerRace();
+            race.AddMultipleReindeer(InputData.LoadLines("reindeer.txt"));
+            var winner1 = race.GetWinnerByRoundRules(2503);
+            Console.WriteLine($"{winner1.Name} at {winner1.Distance} km with {winner1.Points}");
 
             Console.ReadKey();
         }

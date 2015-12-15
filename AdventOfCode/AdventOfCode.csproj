@@ -64,6 +64,7 @@
     <Content Include="InputData\escapedstrings.txt" />
     <Content Include="InputData\LightCommands.txt" />
     <Content Include="InputData\NaughtyWords.txt" />
+    <Content Include="InputData\reindeer.txt" />
     <Content Include="InputData\Wires.txt" />
   </ItemGroup>
   <ItemGroup>
