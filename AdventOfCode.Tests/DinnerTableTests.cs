@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 using AdventOfCode.Core;
 
@@ -13,24 +10,24 @@ using Xunit;
 
 namespace AdventOfCode.Tests
 {
-    public class DinnerTableTests
+    public class SeatingRequirementTests
     {
         [Fact]
         public void ParsesGainLine()
         {
-            var result = HappinessPotential.Parse("Alice would gain 54 happiness units by sitting next to Bob.");
+            var result = SeatingRequirement.Parse("Alice would gain 54 happiness units by sitting next to Bob.");
 
             Check.That(result)
-                .IsEqualTo(new HappinessPotential("Alice", 54, "Bob"));
+                .IsEqualTo(new SeatingRequirement("Alice", 54, "Bob"));
         }
 
         [Fact]
         public void ParseLoseLine()
         {
-            var result = HappinessPotential.Parse("Alice would lose 79 happiness units by sitting next to Carol.");
+            var result = SeatingRequirement.Parse("Alice would lose 79 happiness units by sitting next to Carol.");
 
             Check.That(result)
-                .IsEqualTo(new HappinessPotential("Alice", -79, "Carol"));
+                .IsEqualTo(new SeatingRequirement("Alice", -79, "Carol"));
         }
     }
 
@@ -59,18 +56,18 @@ namespace AdventOfCode.Tests
         public void SampleProblem()
         {
             var subject = new DinnerTable();
-            subject.AddGuestRequirement(HappinessPotential.Parse("Alice would gain 54 happiness units by sitting next to Bob."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Alice would lose 79 happiness units by sitting next to Carol."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Alice would lose 2 happiness units by sitting next to David."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Bob would gain 83 happiness units by sitting next to Alice."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Bob would lose 7 happiness units by sitting next to Carol."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Bob would lose 63 happiness units by sitting next to David."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Carol would lose 62 happiness units by sitting next to Alice."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Carol would gain 60 happiness units by sitting next to Bob."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("Carol would gain 55 happiness units by sitting next to David."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("David would gain 46 happiness units by sitting next to Alice."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("David would lose 7 happiness units by sitting next to Bob."));
-            subject.AddGuestRequirement(HappinessPotential.Parse("David would gain 41 happiness units by sitting next to Carol."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Alice would gain 54 happiness units by sitting next to Bob."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Alice would lose 79 happiness units by sitting next to Carol."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Alice would lose 2 happiness units by sitting next to David."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Bob would gain 83 happiness units by sitting next to Alice."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Bob would lose 7 happiness units by sitting next to Carol."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Bob would lose 63 happiness units by sitting next to David."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Carol would lose 62 happiness units by sitting next to Alice."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Carol would gain 60 happiness units by sitting next to Bob."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("Carol would gain 55 happiness units by sitting next to David."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("David would gain 46 happiness units by sitting next to Alice."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("David would lose 7 happiness units by sitting next to Bob."));
+            subject.AddGuestRequirement(SeatingRequirement.Parse("David would gain 41 happiness units by sitting next to Carol."));
 
             var result = subject.DetermineOptimalArrangement();
 

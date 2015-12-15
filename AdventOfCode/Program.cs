@@ -79,11 +79,22 @@ namespace AdventOfCode
             //next = PasswordGenerator.FindNextPassword(next);
             //Console.WriteLine(next);
 
-            var sum = ElfAccounting.SumAllNumbers(InputData.Load("elf-accounting.json"));
-            Console.WriteLine(sum);
+            //var sum = ElfAccounting.SumAllNumbers(InputData.Load("elf-accounting.json"));
+            //Console.WriteLine(sum);
 
-            sum = ElfAccounting.SumAllNonRedObjects(InputData.Load("elf-accounting.json"));
-            Console.WriteLine(sum);
+            //sum = ElfAccounting.SumAllNonRedObjects(InputData.Load("elf-accounting.json"));
+            //Console.WriteLine(sum);
+
+            var table = new DinnerTable();
+            table.AddGuestRequirements(SeatingRequirement.ParseMultiple(InputData.LoadLines("dinnertable.txt")));
+            var result = table.DetermineOptimalArrangement();
+            var total = result.GetTotalHappiness();
+            Console.WriteLine(total);
+
+            table.AddSelf();
+            var result1 = table.DetermineOptimalArrangement();
+            var total1 = result1.GetTotalHappiness();
+            Console.WriteLine($"New total is {total1} which is {total1 - total} different.");
 
             Console.ReadKey();
         }
